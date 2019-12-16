@@ -39,11 +39,13 @@ class ListNode:
 the list's head and tail nodes."""
 
 
-class DoublyLinkedList:
+class DoublyLinkedList: # dont have to have this
     def __init__(self, node=None):
         self.head = node
         self.tail = node
         self.length = 1 if node is not None else 0
+        ## most expensive source is us, then computation, memory, storage
+        ## dont need max, min, etc but have power to add them if needed
 
     def __len__(self):
         return self.length
@@ -52,7 +54,19 @@ class DoublyLinkedList:
     as the new head of the list. Don't forget to handle 
     the old head node's previous pointer accordingly."""
     def add_to_head(self, value):
-        pass
+        new_node = ListNode(value, None, None)
+        self.length += 1
+        ##if list is empty
+        if not self.head and not self.tail:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            #replace head; new_node = self.head
+            # next and prev are the pointers and the bucket
+            # putting a ref to our new node in the bucket
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
 
     """Removes the List's current head node, making the
     current head's next node the new head of the List.
@@ -84,9 +98,9 @@ class DoublyLinkedList:
 
     """Removes a node from the list and handles cases where
     the node was the head or the tail"""
-    def delete(self, node):
+    def delete(self, node):# handles meta data of head, tail and etc link list
         pass
-        
+
     """Returns the highest value currently in the list"""
     def get_max(self):
         pass
