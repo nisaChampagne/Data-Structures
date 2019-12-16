@@ -72,7 +72,9 @@ class DoublyLinkedList: # dont have to have this
     current head's next node the new head of the List.
     Returns the value of the removed Node."""
     def remove_from_head(self):
-        pass
+        value = self.head.value
+        self.delete(self.head)
+        return value
 
     """Wraps the given value in a ListNode and inserts it
     as the new tail of the list. Don't forget to handle
@@ -96,17 +98,27 @@ class DoublyLinkedList: # dont have to have this
     current tail's previous node the new tail of the List.
     Returns the value of the removed Node."""
     def remove_from_tail(self):
-        pass
+        value = self.tail.value
+        self.delete(self.tail)
+        return value
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List."""
     def move_to_front(self, node):
-        pass
+        if node is self.head:
+            return
+        value = node.value
+        self.delete(node)
+        self.add_to_head(value)
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new tail node of the List."""
     def move_to_end(self, node):
-        pass
+        if node is self.tail:
+            return
+        value = node.value
+        self.delete(node)
+        self.add_to_tail(value)
 
     """Removes a node from the list and handles cases where
     the node was the head or the tail"""
@@ -129,8 +141,25 @@ class DoublyLinkedList: # dont have to have this
         else:
             node.delete()
 
-
-
     """Returns the highest value currently in the list"""
     def get_max(self):
-        pass
+    # go through list and update max value
+    #max_value = current_value
+        # current_val = self.head
+        # max_val = current_val.value
+        # while current_val is not None:
+        #     current_val = current_val.next
+        #     if current_val.value > max_val:
+        #         max_val = current_val.value
+        # return max_val
+        # throws 'NoneType' object has no attribute 'value'
+        # value.none
+        # current went to a None bc
+
+        current_val = self.head
+        max_val = current_val.value
+        while current_val is not None:
+            if current_val.value > max_val:
+                max_val = current_val.value
+                current_val = current_val.next
+        return max_val
