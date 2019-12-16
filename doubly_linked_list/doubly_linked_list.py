@@ -156,10 +156,12 @@ class DoublyLinkedList: # dont have to have this
         # value.none
         # current went to a None bc
 
-        current_val = self.head
-        max_val = current_val.value
-        while current_val is not None:
-            if current_val.value > max_val:
-                max_val = current_val.value
-                current_val = current_val.next
+        if not self.head:
+            return None
+        max_val = self.head.value
+        current = self.head
+        while current:
+            if current.value > max_val:
+                max_val = current.value
+            current = current.next
         return max_val
