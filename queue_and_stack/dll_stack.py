@@ -6,7 +6,6 @@ class Stack:
     #LIFO
     def __init__(self):
         self.size = 0
-        # Why is our DLL a good choice to store our elements?
         self.storage = DoublyLinkedList()
 
     def push(self, value):
@@ -18,11 +17,22 @@ class Stack:
     def pop(self):
         #removes an element at the top of a stack
         if self.len() > 0:
-            val = self.storage.remove_from_head()
+            value = self.storage.remove_from_head()
             self.size -= 1
-            return val
+            return value
         else:
             return None
 
     def len(self):
         return self.size
+
+
+'''
+pop (remove from head)[6] <- [] <-  [6] push (add to head)
+
+                             [5]
+                             [4]
+                             [3]
+                             [2]
+                             [1]
+'''

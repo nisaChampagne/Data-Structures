@@ -16,12 +16,21 @@ class Queue:
         self.size += 1
 
     def dequeue(self):
+        #REMOVE
         if self.len() > 0:
-            val = self.storage.remove_from_head()
+            value = self.storage.remove_from_head()
             self.size -= 1
-            return val
+            return value
         else:
             return None
 
     def len(self):
         return self.size
+
+
+
+
+'''
+[enqueue adding 1]->   [2][3][4]   <-[dequeue removing]
+
+'''
