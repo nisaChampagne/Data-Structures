@@ -3,8 +3,10 @@ import collections
 
 #NOTES ON LRU CACHE
 # LRU = least recently used
+
 #  A reasonable high performance hash table, check
 # The bookkeeping to track the access, easy.
+
 # the get and set operations are both write operation in LRU cache.
 
 class LRUCache:
