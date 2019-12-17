@@ -3,7 +3,10 @@ sys.path.append('../doubly_linked_list')
 from doubly_linked_list import DoublyLinkedList
 
 class Stack:
+    #FILO
+        #The first  object in a stack is the last object to leave
     #LIFO
+        # LAST IN FIRST OUT- LAST TO BE ADDED, FIRST REMOVED
     def __init__(self):
         self.size = 0
         self.storage = DoublyLinkedList()

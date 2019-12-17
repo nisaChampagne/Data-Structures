@@ -4,7 +4,11 @@ from doubly_linked_list import DoublyLinkedList
 
 
 class Queue:
-    #FILO
+    #LILO 
+        #the last item in a queue is the last item
+        # to leave the queue
+    #FIFO
+        # first item in line will be the first out
     def __init__(self):
         self.size = 0
         # Why is our DLL a good choice to store our elements?
