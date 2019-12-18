@@ -1,5 +1,5 @@
 from doubly_linked_list import DoublyLinkedList
-import collections
+# import collections
 
 #NOTES ON LRU CACHE
 # LRU = least recently used
@@ -18,14 +18,16 @@ class LRUCache:
     to every node stored in the cache.
     """
     def __init__(self, limit=10):
-        '''
+
         self.limit = limit
-        self.tm = 0
-        self.cache = {}
-        self.lru = {}
-        '''
-        self.limit = limit
-        self.cache = collections.OrderedDict()
+        self.size = 0
+        self.storage = dict() # quickly grab key from any part of list
+        self.order = DoublyLinkedList() # easier to navigate versus SLL
+
+        #OR
+
+        # self.limit = limit
+        # self.cache = collections.OrderedDict()
 
 #This implementation is pretty clean as all the order bookkeeping is handled by the OrderDict now
 #  For each get and set operation, we first pop the item, then insert back to update its timestamp. 
@@ -45,19 +47,21 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        '''
-        if key in self.cache:
-            self.lru[key] = self.tm
-            self.tm += 1
-            return self.cache[key]
-        return None
-        '''
-        try:
-            value = self.cache.pop(key)
-            self.cache[key] = value
-            return value
-        except KeyError:
+        if key in self.storage:
+            node = self.storage[key]
+            self.order.move_to_end(node)
+            return node.value[1]
+        else:
             return None
+
+        #OR
+
+        # try:
+        #     value = self.cache.pop(key)
+        #     self.cache[key] = value
+        #     return value
+        # except KeyError:
+        #     return None
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -70,21 +74,26 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        '''
-        if len(self.cache) >= self.limit:
-            # find the LRU entry
-            old_key = min(self.lru.keys(), key=lambda k: self.lru[k])
-            self.cache.pop(old_key)
-            self.lru.pop(old_key)
-        self.cache[key] = value
-        self.lru[key] = self.tm
-        self.tm += 1
-        '''
+        if key in self.storage:
+            node = self.storage[key]
+            node.value = (key, value)
+            self.order.move_to_end(node)
+            return
+        else:
+            if self.size == self.limit:
+                del self.storage[self.order.head.value[0]]
+                self.order.remove_from_head()
+                self.size -= 1
+        self.order.add_to_tail((key, value))
+        self.storage[key] = self.order.tail
+        self.size += 1
 
-        try:
-            self.cache.pop(key)
-        except KeyError:
-            if len(self.cache) >= self.limit:
-                self.cache.popitem(last=False)
-        self.cache[key] = value
+        #OR
+
+        # try:
+        #     self.cache.pop(key)
+        # except KeyError:
+        #     if len(self.cache) >= self.limit:
+        #         self.cache.popitem(last=False)
+        # self.cache[key] = value
 
