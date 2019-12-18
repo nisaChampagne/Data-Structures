@@ -1,13 +1,6 @@
 from doubly_linked_list import DoublyLinkedList
 # import collections
 
-#NOTES ON LRU CACHE
-# LRU = least recently used
-
-#  A reasonable high performance hash table, check
-# The bookkeeping to track the access, easy.
-
-# the get and set operations are both write operation in LRU cache.
 
 class LRUCache:
     """
@@ -28,15 +21,13 @@ class LRUCache:
 
         # self.limit = limit
         # self.cache = collections.OrderedDict()
+        # ^
+        # |
+        #This implementation is pretty clean as all the order bookkeeping is handled by the OrderDict now
+        #  For each get and set operation, we first pop the item, then insert back to update its timestamp. 
+        # The element in the head of sequence is the least-used-item, thus the candidate to expire
+        #  if the maximum capacity is reached.
 
-#This implementation is pretty clean as all the order bookkeeping is handled by the OrderDict now
-#  For each get and set operation, we first pop the item, then insert back to update its timestamp. 
-# The element in the head of sequence is the least-used-item, thus the candidate to expire
-#  if the maximum capacity is reached.
-
-# We use two data structures to implement an LRU cache
-# ? 1) Queue which is implemented using a doubly linked list. The maximum size of the queue will be equal to the total number of frames available (cache size). The most recently used pages will be near front end and least recently pages will be near the rear end.
-# ? 3) A Hash with page number as key and address of the corresponding queue node as value.
 
 
     """
